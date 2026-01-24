@@ -1,0 +1,91 @@
+html {
+    scroll-behavior: smooth;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.container {
+    flex: 1;
+}
+/* Navbar */
+.navbar {
+    background-color: white !important;
+}
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+.nav-link {
+    color: #222222 !important;
+}
+.navbar-brand {
+  font-family: "Playfair Display", serif;
+  font-weight: bolder;
+  color: #fe424d !important;
+  font-size: 1.5rem !important;
+}
+
+/* Footer */
+.f-info-links a {
+    text-decoration: none;
+    color: #222222 !important;
+}
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #ebebeb;
+    width: 100%;
+}
+.f-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1rem;
+}
+.f-info-links {
+    display: flex;
+    gap: 1rem;;
+}
+
+/* Cards */
+.card {
+    border: none !important;
+    margin-bottom: 2.5rem !important;
+}
+.card-img-top {
+    border-radius: 1rem !important;
+    object-fit: cover !important;
+    width: 100% !important;
+}
+.card-img-top:hover {
+    background-color: white;
+}
+.card-body {
+    padding: 0 !important;
+    padding-top: 0.5rem !important;
+}
+.card-img-overlay {
+    opacity: 0 !important;
+}
+.card-img-overlay:hover {
+    opacity: 0.2 !important;
+    background-color: white !important;
+}
+
+/* Edit */
+.btn {
+    background-color: #fe424d !important;
+    border: none !important
+}
+
+/* Show */
+.show-card {
+    margin-bottom: 1.5rem !important;
+}

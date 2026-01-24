@@ -1,0 +1,32 @@
+<% layout("layouts/boilerplate.ejs") %>  <!--layouts path is relative to views folder-->
+<body>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h2><%= data.title %></h2>
+            <div class="card show-card">
+                <img src="<%= data.image %>" class="card-img-top" alt="<%= data.title %>" style="height: 40vh;">
+                <div class="card-body">
+                    <p class="card-text">
+                        <%= data.description %>
+                        <br>
+                        Price: <b>&#8377; <%= data.price.toLocaleString("en-IN") %> / Night</b>
+                        <br>
+                        Location: <%= data.location %>
+                        <br>
+                        Country: <%= data.country %>
+                    </p>
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+                <form action="/listings/<%= data._id %>/edit" method="GET">
+                    <button class="btn btn-dark">Edit</button>
+                </form>
+                <form action="/listings/<%= data._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-dark">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+ 
+</body>

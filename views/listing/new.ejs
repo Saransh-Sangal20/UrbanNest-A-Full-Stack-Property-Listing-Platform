@@ -1,0 +1,37 @@
+<% layout("layouts/boilerplate.ejs") %>  <!--layouts path is relative to views folder-->
+<body>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h2>Add New Listing</h2>
+            <form action="/listings" method="POST" class="mb-4">
+                <div class="title-div mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" placeholder="Enter Title" class="form-control" id="title">
+                </div>
+                <div class="description-div mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" name="description" placeholder="Enter Description" class="form-control" id="description">
+                </div>
+                <div class="image-div mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="text" name="image" placeholder="Enter Image Link/URL" class="form-control" id="image">
+                </div>
+                <div class="row">
+                <div class="price-div mb-3 col-lg-6 col-md-6">
+                    <label for="price" class="form-label">Price (&#8377;)</label>
+                    <input type="number" name="price" placeholder="Enter Price (Eg. 12000)" class="form-control" id="price">
+                </div>
+                <div class="country-div mb-3 col-lg-6 col-md-6">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" name="country" placeholder="Enter Country" class="form-control" id="country">
+                </div>
+                </div>
+                <div class="location-div mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" name="location" placeholder="Enter Location" class="form-control" id="location">
+                </div>
+                <button class="btn btn-dark">Add Listing</button>
+            </form>
+        </div>
+    </div>
+</body>
