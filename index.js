@@ -6,6 +6,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const listingSchema = require("./schema.js");
 
 const app = express();
 const port = 8080;
@@ -34,6 +35,17 @@ app.listen(port, () => {
     console.log("Server listening on port", port);
 })
 
+function validateListing(req, res, next) {
+    const result = listingSchema.validate(req.body);  // validating schema which is inside req.body
+    if (result.error) {
+        console.log(result);
+        return next(new ExpressError(400, result.error));
+    }
+    else {
+        next();
+    }
+}
+
 // index route
 app.get("/listings", async (req, res, next) => {
     try {
@@ -52,11 +64,7 @@ app.get("/listings/new", (req, res) => {
 })
 
 // create route
-app.post("/listings", async (req, res, next) => {
-    if (!req.body.title || !req.body.description || !req.body.price || !req.body.location || !req.body.country) {
-        return next(new ExpressError(400, "Send valid data for listing"));
-    }  // error passed to error handling middleware if any of the required fields are missing
-
+app.post("/listings", validateListing, async (req, res, next) => {
     let {title, description, price, image, location, country} = req.body;
     try {
         const newListing = new Listing({title, description, price, image, location, country});
@@ -85,13 +93,8 @@ app.get("/listings/:id/edit", async (req, res, next) => {
 })
 
 // update route
-app.put("/listings/:id", wrapAsync(async(req, res) => {
+app.put("/listings/:id", validateListing, wrapAsync(async(req, res) => {
     let {id} = req.params;
-
-    if (!req.body.title || !req.body.description || !req.body.price || !req.body.location || !req.body.country) {
-        throw new ExpressError(400, "Send valid data for listing");
-    }  // error passed to error handling middleware if any of the required fields are missing
-
     let {title, description, price, image, location, country} = req.body;
     const editData = await Listing.findByIdAndUpdate(id, {title, description, price, image, location, country}, {new: true}, {runValidtaors: true});
     console.log(editData);
@@ -135,5 +138,5 @@ app.all(/.*/, (req, res) => {  // [/.*/] is a regex that matches all the routes
 // error handling middleware
 app.use((err, req, res, next) => {
     let {status=500, message="Something went wrong"} = err;
-    res.status(status).send(message);
+    res.status(status).render("listing/error.ejs", {message});
 })
